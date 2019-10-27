@@ -46,7 +46,7 @@ trait BaseIndexTrait
     /**
      * @var string Default search field
      */
-    protected $defaultField = '_text';
+    protected $defaultField = 'text';
     /**
      * @var array Stored fields
      */
@@ -55,7 +55,7 @@ trait BaseIndexTrait
      * @var array Fields to copy to the default fields
      */
     protected $copyFields = [
-        '_text' => [
+        'text' => [
             '*',
         ],
     ];
