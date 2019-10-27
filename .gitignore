@@ -2,3 +2,4 @@
 /app
 /.php_cs.cache
 /resources
+/node_modules
