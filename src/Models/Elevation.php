@@ -3,6 +3,7 @@
 namespace Firesphere\SolrSearch\Models;
 
 use SilverStripe\ORM\DataObject;
+use Firesphere\SolrSearch\Forms\ElevationField;
 
 class Elevation extends DataObject
 {
@@ -17,5 +18,11 @@ class Elevation extends DataObject
     ];
 
     private static $summary_fields = ['ID', 'Keyword'];
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+        $fields->addFieldToTab('Root.Main', ElevationField::create('Keyword', 'Keyword'));
+        return $fields;
+    }
 }
-    

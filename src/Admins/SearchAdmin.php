@@ -29,7 +29,6 @@ class SearchAdmin extends ModelAdmin
         SolrLog::class,
         DirtyClass::class,
         Elevation::class,
-        ElevatedItem::class,
     ];
 
     /**
@@ -59,8 +58,8 @@ class SearchAdmin extends ModelAdmin
     public function init()
     {
         parent::init();
-
-        //Requirements::css('firesphere/solr-search:client/dist/main.css');
+        Requirements::css('firesphere/solr-search:client/dist/main.css');
+        Requirements::javascript('firesphere/solr-search: client/dist/bundle.js');
     }
 
     public function getEditForm($id = null, $fields = null)
