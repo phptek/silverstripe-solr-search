@@ -272,6 +272,7 @@ class SolrIndexTask extends BuildTask
      * @param string $class
      * @param int $batchLength
      * @param BaseIndex $index
+     * @param bool $pcntl Is this a forked child, and if so, act on it
      * @throws Exception
      */
     private function doReindex($group, $class, BaseIndex $index, $pcntl = false)
@@ -358,6 +359,8 @@ class SolrIndexTask extends BuildTask
     }
 
     /**
+     * Spawn a child, for each available core, to speed up indexing.
+     *
      * @param string $class
      * @param BaseIndex $index
      * @param int $group
