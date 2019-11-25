@@ -391,7 +391,7 @@ abstract class BaseIndex
         $synonyms = Synonyms::getSynonymsAsString($defaults);
         $syn = SearchSynonym::get();
         foreach ($syn as $synonym) {
-            $synonyms .= "\n" . $synonym->Keyword . ',' . $synonym->Synonym;
+            $synonyms .= "\n" . $synonym->getCombinedSynonym();
         }
 
         // Upload synonyms
