@@ -28,8 +28,15 @@ use SilverStripe\View\ArrayData;
 use Solarium\Component\Result\Highlighting\Highlighting;
 use Solarium\Core\Client\Client;
 
+/**
+ * Class BaseIndexTest
+ * @package Firesphere\SolrSearch\Tests
+ */
 class BaseIndexTest extends SapphireTest
 {
+    /**
+     * @var string
+     */
     protected static $fixture_file = '../fixtures/DataResolver.yml';
     /**
      * @var array
@@ -52,6 +59,9 @@ class BaseIndexTest extends SapphireTest
      */
     protected $index;
 
+    /**
+     *
+     */
     public function testConstruct()
     {
         $this->assertInstanceOf(Client::class, $this->index->getClient());
@@ -61,6 +71,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertEquals([], $this->index->getHistory());
     }
 
+    /**
+     *
+     */
     public function testInit()
     {
         $this->assertNull($this->index->init());
@@ -81,6 +94,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertCount(1, $index->getFacetFields());
     }
 
+    /**
+     *
+     */
     public function testAddAllFieldsTypes()
     {
         $this->index->addAllFulltextFields();
@@ -120,6 +136,9 @@ class BaseIndexTest extends SapphireTest
         }
     }
 
+    /**
+     *
+     */
     public function testFacetFields()
     {
         /** @var Page $parent */
@@ -163,6 +182,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertInstanceOf(Highlighting::class, $result->getHighlight());
     }
 
+    /**
+     *
+     */
     public function testStoredFields()
     {
         $ftsFields = $this->index->getFulltextFields();
@@ -178,6 +200,9 @@ class BaseIndexTest extends SapphireTest
         $this->index->setFulltextFields($ftsFields);
     }
 
+    /**
+     *
+     */
     public function testGetSynonyms()
     {
         $store = new FileConfigStore(['path' => '.solr']);
@@ -186,11 +211,17 @@ class BaseIndexTest extends SapphireTest
         $this->assertEmpty(trim($this->index->getSynonyms($store, false)));
     }
 
+    /**
+     *
+     */
     public function testIndexName()
     {
         $this->assertEquals('TestIndex', $this->index->getIndexName());
     }
 
+    /**
+     *
+     */
     public function testUploadConfig()
     {
         $config = [
@@ -220,6 +251,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertNotEquals($original, $configStore->getConfig());
     }
 
+    /**
+     *
+     */
     public function testGetFieldsForIndexing()
     {
         $expected = [
@@ -231,6 +265,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertEquals($expected, array_values($this->index->getFieldsForIndexing()));
     }
 
+    /**
+     *
+     */
     public function testGetSetClient()
     {
         $client = $this->index->getClient();
@@ -241,6 +278,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertInstanceOf(Client::class, $this->index->getClient());
     }
 
+    /**
+     *
+     */
     public function testDoSearch()
     {
         $index = new CircleCITestIndex();
@@ -308,6 +348,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertNotEmpty($result->getCollatedSpellcheck());
     }
 
+    /**
+     *
+     */
     public function testDoRetry()
     {
         $index = new CircleCITestIndex();
@@ -330,6 +373,9 @@ class BaseIndexTest extends SapphireTest
         }
     }
 
+    /**
+     *
+     */
     public function testSetFacets()
     {
         $this->index->addFacetField(Page::class, ['Title' => 'Title', 'Field' => 'Content']);
@@ -347,6 +393,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertEquals($expected, $this->index->getFacetFields());
     }
 
+    /**
+     *
+     */
     public function testAddCopyField()
     {
         $this->index->addCopyField('mycopyfield', ['Content']);
@@ -357,6 +406,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertEquals($expected, $this->index->getCopyFields());
     }
 
+    /**
+     *
+     */
     public function testAddFulltextField()
     {
         $this->index->addFulltextField('myfield', null, ['boost' => 2]);
@@ -365,6 +417,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertEquals(2, $this->index->getBoostedFields()['myfield']);
     }
 
+    /**
+     *
+     */
     public function testAddSortField()
     {
         $this->index->addSortField('TestField');
@@ -373,6 +428,9 @@ class BaseIndexTest extends SapphireTest
         $this->assertContains('TestField', $this->index->getSortFields());
     }
 
+    /**
+     *
+     */
     protected function setUp()
     {
         $task = new SolrConfigureTask();
